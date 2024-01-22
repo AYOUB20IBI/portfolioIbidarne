@@ -1,4 +1,4 @@
-const URL_PDF ='http://localhost:5173/IBIDARNE-AYOUB.pdf'
+const URL_PDF ='https://ibidarne-ayoub.vercel.app/IBIDARNE-AYOUB.pdf'
 function DownloadCV() {
     const downloadFileAtURL =(url)=>{
         const fileName = url.split('/').pop();

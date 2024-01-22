@@ -6,6 +6,7 @@ import './Button.css';
 import Lottie from 'lottie-react';
 import devAnimation from '../dev.json'
 import LoadingPage from '../loadingPage/LoadingPage';
+import { Link } from 'react-router-dom';
 
 function Hero() {
   const lottieRef = useRef();
@@ -40,7 +41,9 @@ function Hero() {
               <button className="button">
                 <span className="button_lg">
                   <span className="button_sl"></span>
-                  <span className="button_text"><i className="fa-solid fa-hand-point-right"></i> MORE ABOUT ME</span>
+                  <Link to='/about' style={{color:'#fff'}}>
+                    <span className="button_text"><i className="fa-solid fa-hand-point-right"></i> MORE ABOUT ME</span>
+                  </Link>
                 </span>
               </button>
             </div>
