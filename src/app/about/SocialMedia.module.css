@@ -1,0 +1,25 @@
+.divBTN{
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.socialBTN{
+    color: #fff;
+    font-weight: 700;
+    background: #454549;
+    border: none;
+    padding: 14px 16px;
+    cursor: pointer;
+    border-width: 1px;
+    border-radius: 5px;
+    box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
+    position: relative;
+    transition: 0.3s;
+    opacity: 0.5;
+}
+
+.socialBTN:hover{
+    opacity: 1;
+    border: 1px solid #afafaf;
+    color: #ffffff;
+}
