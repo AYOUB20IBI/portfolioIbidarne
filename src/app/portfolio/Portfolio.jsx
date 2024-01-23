@@ -12,7 +12,7 @@ function Portfolio() {
   const handleShow = () => setShow(true);
   const [showPro, setShowPro] = useState(null);
   const [dataProjects, setDataProjects] = useState(data);
-  const [searchData, setSearchData] = useState(null);
+  const [searchData, setSearchData] = useState('');
 
   const [isLoading, setIsLoading] = useState(Boolean(true));
   useEffect(()=>{
@@ -35,106 +35,12 @@ function Portfolio() {
     console.log(code);
     return data.filter(item => item.type.includes(code));
   }
-  return (
-    <>
-    {isLoading ? (
-        <LoadingPage />
-      ) : (
-      <section className="projects">
-        <div className="container">
-          <div className="title_section_projects">
-            <h1>MY <span>PROJECTS</span></h1>
-          </div>
-          <div className="filltrage" style={{marginBottom:'2rem'}}>
-            <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label" style={{
-                  color:'#fff',
-                  background: '#24252e',
-                  padding: '5px',
-                  borderRadius: '20px',
-                  fontWeight: '700'
-                }}>
-                  Select Language Project
-                </InputLabel>
-                <Select 
-                  color="error"
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  label="Age"
-                  onChange={(e) => setSearchData(handleSearcheByCode(e.target.value))}
-                >
-                  <MenuItem value={null}>All Projects</MenuItem>
-                  <MenuItem value="HTML & CSS">HTML & CSS</MenuItem>
-                  <MenuItem value="JavaScript">JavaScript</MenuItem>
-                  <MenuItem value="Bootstrap">Bootstrap</MenuItem>
-                  <MenuItem value="PHP & MYSQL">PHP & MYSQL</MenuItem>
-                  <MenuItem value="Laravel">Laravel</MenuItem>
-                  <MenuItem value="React & MUI">React & MUI</MenuItem>
-                  <MenuItem value="Node & Express">Node & Express</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </div>
-          <div className='show_projects'>
-            {/* search */}
-            {searchData &&
-              searchData.map((item,index)=>(
-                <>
-                <div className="card_project" key={index}>
-                  <div className="content">
-                    <div className="back">
-                      <div className="back-content" style={{
-                        backgroundImage:`linear-gradient(to right, rgb(0 0 0), rgb(0 0 0 / 12%)), url(${item.poster})`,
-                        backgroundRepeat: 'no-repeat',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center'}}>
-                        <i style={{fontSize: '3rem'}} className="fa-solid fa-code"></i>
-                        <strong>{item.title}</strong>
-                      </div>
-                    </div>
-                    <div className="front">
-                      
-                      <div className="img">
-                        <div className="circle">
-                        </div>
-                        <div className="circle" id="right">
-                        </div>
-                        <div className="circle" id="bottom">
-                        </div>
-                      </div>
 
-                      <div className="front-content">
-                        <small className="badge">Web Development</small>
-                        <div className="description">
-                          <div className="title">
-                            <p className="title">
-                              <strong>{item.title}</strong>
-                            </p>
-                            <svg fillRule="nonzero" height="15px" width="15px" viewBox="0,0,256,256"  xmlns="http://www.w3.org/2000/svg">
-                            <g style={{mixblendmode: 'normal'}} textAnchor="none" fontSize="none" fontWeight="none" fontFamily="none" strokeDashoffset="0" strokeDasharray="" strokeMiterlimit="10" strokeLinejoin="miter" strokeLinecap="butt" strokeWidth="1" stroke="none" fillRule="nonzero" fill="#20c997"><g transform="scale(8,8)"><path d="M25,27l-9,-6.75l-9,6.75v-23h18z"></path></g></g></svg>
-                          </div>
-                          <p className="card-footer">
-                            {item.description}
-                          </p>
-                          <div className='d-flex justify-content-center align-items-center'>
-                            <button className="button" onClick={()=>showProject(item.id)}>
-                              <span className="button_lg">
-                                <span className="button_sl"></span>
-                                <span className="button_text"><i className="fa-solid fa-tv"></i> PREVIEW</span>
-                              </span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                </>
-              ))
-            }
-            {/* get all data */}
-            {dataProjects && searchData===null &&
+
+  const ShowAllProjects =()=>{
+    if(searchData === ''){
+      return(
+        <>  {
               dataProjects.map((item,index)=>(
                 <>
                 <div className="card_project" key={index}>
@@ -189,6 +95,122 @@ function Portfolio() {
                 </>
               ))
             }
+        </>
+      )
+    }else if(searchData.length !== 0){
+      return (
+        <>
+        {
+          searchData.map((item,index)=>(
+            <>
+            <div className="card_project" key={index}>
+              <div className="content">
+                <div className="back">
+                  <div className="back-content" style={{
+                    backgroundImage:`linear-gradient(to right, rgb(0 0 0), rgb(0 0 0 / 12%)), url(${item.poster})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'}}>
+                    <i style={{fontSize: '3rem'}} className="fa-solid fa-code"></i>
+                    <strong>{item.title}</strong>
+                  </div>
+                </div>
+                <div className="front">
+                  
+                  <div className="img">
+                    <div className="circle">
+                    </div>
+                    <div className="circle" id="right">
+                    </div>
+                    <div className="circle" id="bottom">
+                    </div>
+                  </div>
+
+                  <div className="front-content">
+                    <small className="badge">Web Development</small>
+                    <div className="description">
+                      <div className="title">
+                        <p className="title">
+                          <strong>{item.title}</strong>
+                        </p>
+                        <svg fillRule="nonzero" height="15px" width="15px" viewBox="0,0,256,256"  xmlns="http://www.w3.org/2000/svg">
+                        <g style={{mixblendmode: 'normal'}} textAnchor="none" fontSize="none" fontWeight="none" fontFamily="none" strokeDashoffset="0" strokeDasharray="" strokeMiterlimit="10" strokeLinejoin="miter" strokeLinecap="butt" strokeWidth="1" stroke="none" fillRule="nonzero" fill="#20c997"><g transform="scale(8,8)"><path d="M25,27l-9,-6.75l-9,6.75v-23h18z"></path></g></g></svg>
+                      </div>
+                      <p className="card-footer">
+                        {item.description}
+                      </p>
+                      <div className='d-flex justify-content-center align-items-center'>
+                        <button className="button" onClick={()=>showProject(item.id)}>
+                          <span className="button_lg">
+                            <span className="button_sl"></span>
+                            <span className="button_text"><i className="fa-solid fa-tv"></i> PREVIEW</span>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </>
+          ))
+        }
+        </>
+      )
+    }else if(searchData.length === 0){
+      return (
+        <>
+        <div style={{gridColumn: '1/3'}}>
+          <h1 style={{color: '#fff',opacity: '0.5',fontSize: '30px'}} className="no-result text-center mt-5">No results found</h1>
+        </div>
+        </>
+      )
+    }
+  }
+  return (
+    <>
+    {isLoading ? (
+        <LoadingPage />
+      ) : (
+      <section className="projects">
+        <div className="container">
+          <div className="title_section_projects">
+            <h1>MY <span>PROJECTS</span></h1>
+          </div>
+          <div className="filltrage" style={{marginBottom:'2rem'}}>
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label" style={{
+                  color:'#fff',
+                  background: '#24252e',
+                  padding: '5px',
+                  borderRadius: '20px',
+                  fontWeight: '700'
+                }}>
+                  Select Language Project
+                </InputLabel>
+                <Select 
+                  color="error"
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  label="Age"
+                  onChange={(e) => setSearchData(handleSearcheByCode(e.target.value))}
+                >
+                  <MenuItem >All Projects</MenuItem>
+                  <MenuItem value="HTML & CSS">HTML & CSS</MenuItem>
+                  <MenuItem value="JavaScript">JavaScript</MenuItem>
+                  <MenuItem value="Bootstrap">Bootstrap</MenuItem>
+                  <MenuItem value="PHP & MYSQL">PHP & MYSQL</MenuItem>
+                  <MenuItem value="Laravel">Laravel</MenuItem>
+                  <MenuItem value="React & MUI">React & MUI</MenuItem>
+                  <MenuItem value="Node & Express">Node & Express</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </div>
+          <div className='show_projects'>
+
+            {ShowAllProjects()}
           </div>
         </div>
         
